@@ -15,6 +15,8 @@ public class ResultBuilder implements Builder<Result> {
 
     private static final ResultBuilder INSTANCE = new ResultBuilder();
 
+    private ResultBuilder() {}
+
     private Result result;
 
     public static ResultBuilder create() {
@@ -58,6 +60,8 @@ public class ResultBuilder implements Builder<Result> {
         if (result.getEntryRuleKeyPair() == null) {
             throw new NullPointerException("EntryRuleKeyPair must not be null");
         }
+        System.out.println("Status :"+result.getStatus().toString());
+        System.out.println("ERKP :"+result.getEntryRuleKeyPair().getFirst()+" "+result.getEntryRuleKeyPair().getSecond());
         return result;
     }
 }
