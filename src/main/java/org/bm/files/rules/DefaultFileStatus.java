@@ -11,9 +11,11 @@ public class DefaultFileStatus implements Status {
     private final int severity;
     private final String description;
     private final String possibleResolution;
+    private final String code;
 
-    public DefaultFileStatus(int severity, String description, String possibleResolution) {
+    public DefaultFileStatus(int severity, String code, String description, String possibleResolution) {
         this.severity = severity;
+        this.code = code;
         this.description = description;
         this.possibleResolution = possibleResolution;
     }
@@ -21,6 +23,11 @@ public class DefaultFileStatus implements Status {
     @Override
     public int getSeverity() {
         return severity;
+    }
+
+    @Override
+    public String getCode() {
+        return code;
     }
 
     @Override
