@@ -28,6 +28,7 @@ public class Tests {
 
     private final Logger LOG = Logger.getLogger(Tests.class);
 
+    @Autowired
     private ResultBuilder resultBuilder;
 
     @Autowired
@@ -37,10 +38,6 @@ public class Tests {
     @Autowired
     private ApplicationContext context;
 
-    @Before
-    public void before() {
-        resultBuilder = (ResultBuilder) context.getBean("resultBuilder");
-    }
 
 
     @Test

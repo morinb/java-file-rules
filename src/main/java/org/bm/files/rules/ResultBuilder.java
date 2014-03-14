@@ -64,4 +64,12 @@ public class ResultBuilder implements Builder<Result> {
         System.out.println("ERKP :"+result.getEntryRuleKeyPair().getFirst()+" "+result.getEntryRuleKeyPair().getSecond());
         return result;
     }
+
+    @Override
+    public void clear() {
+        this.result.setEntryRuleKeyPair(null);
+        this.result.setStatus(null);
+    }
+
+
 }

@@ -7,4 +7,5 @@ package org.bm.files.rules;
  */
 public interface Builder<T> {
     T build();
+    void clear();
 }
