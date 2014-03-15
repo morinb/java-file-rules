@@ -20,6 +20,7 @@ public class ResultBuilder implements Builder<Result> {
     private Result result;
 
     public static ResultBuilder create() {
+        INSTANCE.clear();
         return INSTANCE;
     }
 
@@ -60,15 +61,12 @@ public class ResultBuilder implements Builder<Result> {
         if (result.getEntryRuleKeyPair() == null) {
             throw new NullPointerException("EntryRuleKeyPair must not be null");
         }
-        System.out.println("Status :"+result.getStatus().toString());
-        System.out.println("ERKP :"+result.getEntryRuleKeyPair().getFirst()+" "+result.getEntryRuleKeyPair().getSecond());
         return result;
     }
 
     @Override
     public void clear() {
-        this.result.setEntryRuleKeyPair(null);
-        this.result.setStatus(null);
+        this.result = null;
     }
 
 

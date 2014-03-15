@@ -1,0 +1,10 @@
+A1234;FTA       ;PBL            ;20140315021702;20140315021702
+H;header 1
+R;record 11
+R;record 12
+H;header 2
+R;record 21
+R;record 22
+R;record 23
+R;record 24
+

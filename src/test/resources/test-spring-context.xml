@@ -7,4 +7,34 @@
 
     <bean id="resultBuilder" class="org.bm.files.rules.ResultBuilder" factory-method="create" />
 
+
+    <bean id="groovyClassDirectories" class="java.io.File">
+        <constructor-arg>
+            <value type="java.lang.String">src/main/resources/rules</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="testFile" class="java.io.File">
+        <constructor-arg>
+            <value type="java.lang.String">src/test/resources/files/TestFile.txt</value>
+        </constructor-arg>
+    </bean>
+
+
+    <bean id="optionalHeaderRegexp" class="java.util.regex.Pattern" factory-method="compile">
+        <constructor-arg value="^([a-zA-Z0-9 ]{5});([a-zA-Z0-9 ]{10});([a-zA-Z0-9 ]{15});(\d{14});(\d{14})$"/>
+    </bean>
+
+    <bean id="headerRegexp" class="java.util.regex.Pattern" factory-method="compile">
+        <constructor-arg value="^H;(.*)$"/>
+    </bean>
+
+    <bean id="recordRegexp" class="java.util.regex.Pattern" factory-method="compile">
+        <constructor-arg value="^R;(.*)$"/>
+    </bean>
+
+    <bean id="engine" class="org.bm.rules.impl.ProceduralEngine" />
+
+    <bean id="resultFormatter" class="org.bm.rules.impl.DefaultResultFormatter" />
+
 </beans>

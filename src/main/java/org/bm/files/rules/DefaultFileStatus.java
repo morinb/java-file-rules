@@ -39,4 +39,9 @@ public class DefaultFileStatus implements Status {
     public String getPossibleResolution() {
         return possibleResolution;
     }
+
+    @Override
+    public boolean isErrorStatus() {
+        return !this.equals(Statuses.OK.getStatus());
+    }
 }

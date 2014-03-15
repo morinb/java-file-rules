@@ -3,4 +3,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
+
+    <bean id="optionalHeaderRegexp" class="java.util.regex.Pattern" factory-method="compile">
+        <constructor-arg value="^([a-zA-Z0-9 ]{5});([a-zA-Z0-9 ]{10});([a-zA-Z0-9 ]{15});(\d{14});(\d{14})$"/>
+    </bean>
+
+    <bean id="headerRegexp" class="java.util.regex.Pattern" factory-method="compile">
+        <constructor-arg value="^H;(.*)$"/>
+    </bean>
+
+    <bean id="recordRegexp" class="java.util.regex.Pattern" factory-method="compile">
+        <constructor-arg value="^R;(.*)$"/>
+    </bean>
+
+
 </beans>

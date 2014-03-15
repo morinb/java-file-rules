@@ -7,6 +7,9 @@ import org.bm.rules.KeyPair
 import org.bm.rules.Result
 import org.bm.rules.Rule
 import org.bm.rules.impl.KeyPairImpl
+import org.springframework.context.ApplicationContext
+
+import java.util.regex.Pattern
 
 /**
  * .
@@ -14,23 +17,25 @@ import org.bm.rules.impl.KeyPairImpl
  */
 
 class LineFormatRule implements Rule {
-    /**
-     * possible header at the start of the file
-     */
-    def optionalHeaderPattern = ~/^([a-zA-Z0-9 ]{5});([a-zA-Z0-9 ]{10});([a-zA-Z0-9 ]{15});(\d{14});(\d{14})$/
 
-    /**
-     * Real Header pattern.
-     */
-    def headerPattern = ~/^H;(.*)$/
-
-    /**
-     * Records pattern.
-     */
-    def recordPattern = ~/^R;(.*)$/
 
     @Override
     Result apply(Entry entry) {
+        /**
+         * possible header at the start of the file
+         */
+        def optionalHeaderPattern = (Pattern) context.getBean("optionalHeaderRegexp")
+
+        /**
+         * Real Header pattern.
+         */
+        def headerPattern = (Pattern) context.getBean("headerRegexp")
+
+        /**
+         * Records pattern.
+         */
+        def recordPattern = (Pattern) context.getBean("recordRegexp")
+
         // Because the will be more record than header and more headers than optional header, check the record first.
         if (recordPattern.matcher(entry.content).matches()) {
             return recordValidation(entry).build()
@@ -46,10 +51,10 @@ class LineFormatRule implements Rule {
 
     private ResultBuilder optionalHeaderValidation(Entry entry) {
         // Optional header MUST be the first line of the file
-        Integer lineNumber = (Integer) entry.metaDatas.get("lineNumber")
-        KeyPair<Entry, Rule> keyPair = new KeyPairImpl<>(entry, this)
+        final Integer lineNumber = (Integer) entry.metaDatas.get("lineNumber")
+        final KeyPair<Entry, Rule> keyPair = new KeyPairImpl<>(entry, this)
 
-        ResultBuilder rb = ResultBuilder.create().with(keyPair)
+        final ResultBuilder rb = ResultBuilder.create().with(keyPair)
 
         if (lineNumber != 0) {
             return rb.with(Statuses.INVALID_OPTIONAL_HEADER)
@@ -58,15 +63,55 @@ class LineFormatRule implements Rule {
     }
 
     private ResultBuilder headerValidation(Entry entry) {
-        return null;
+        final KeyPair<Entry, Rule> keyPair = new KeyPairImpl<>(entry, this)
+        final ResultBuilder rb = ResultBuilder.create().with(keyPair)
+
+        // match item in the header.
+        // We already know that it matches the format of a header.
+
+        return rb.with(Statuses.OK)
     }
 
     private ResultBuilder recordValidation(Entry entry) {
-        return null
+        final KeyPair<Entry, Rule> keyPair = new KeyPairImpl<>(entry, this)
+        final ResultBuilder rb = ResultBuilder.create().with(keyPair)
+
+        // match item in the records
+        // We already know that it matches the format of a record.
+
+
+        return rb.with(Statuses.OK)
     }
 
     @Override
     String getDescription() {
         return "Check the line format."
+    }
+
+    @Override
+    long getPriority() {
+        return 0
+    }
+
+
+    private ApplicationContext context;
+
+    @Override
+    public void setApplicationContext(ApplicationContext context) {
+        this.context = context;
+    }
+
+    @Override
+    int compareTo(Rule o) {
+        // something is always greater than null.
+        if (o == null) {
+            return 1
+        }
+
+        if (this == o) {
+            return 0
+        }
+
+        return this.priority.compareTo(o.priority);
     }
 }
