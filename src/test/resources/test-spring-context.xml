@@ -3,9 +3,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-    <bean id="testRule" class="TestRule" />
+    <bean id="testRule" class="TestRule"/>
 
-    <bean id="resultBuilder" class="org.bm.files.rules.ResultBuilder" factory-method="create" />
+    <bean id="resultBuilder" class="org.bm.files.rules.ResultBuilder" factory-method="create"/>
 
 
     <bean id="groovyClassDirectories" class="java.io.File">
@@ -22,19 +22,19 @@
 
 
     <bean id="optionalHeaderRegexp" class="java.util.regex.Pattern" factory-method="compile">
-        <constructor-arg value="^([a-zA-Z0-9 ]{5});([a-zA-Z0-9 ]{10});([a-zA-Z0-9 ]{15});(\d{14});(\d{14})$"/>
+        <constructor-arg value="^([a-zA-Z0-9 ]{5});([a-zA-Z0-9 ]{10});([a-zA-Z0-9 ]{10});([a-zA-Z0-9 ]{15});(\d{14});(\d{14});?$"/>
     </bean>
 
     <bean id="headerRegexp" class="java.util.regex.Pattern" factory-method="compile">
-        <constructor-arg value="^H;(.*)$"/>
+        <constructor-arg value="^H;([A-Z0-9]{8,11});([A-Z]{3});([A-Z0-9]{34});([A-Z]{3});([A-Z0-9]{11});([0-9]{1,8});([CD]{1});([0-9.]{19});([0-9]*?);([0-9]{8});([0-9]{6});([ \!\\&quot;#\$%&amp;&apos;\(\)\*\+,-\.\/0123456789\:&lt;\=&gt;\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~]{1,50});([A-Z0-9]{11});([ \!\\&quot;#\$%&amp;&apos;\(\)\*\+,-\.\/0123456789\:&lt;\=&gt;\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~]{1,50});([ \!\\&quot;#\$%&amp;&apos;\(\)\*\+,-\.\/0123456789\:&lt;\=&gt;\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~]{1,150});([A-Z]{3});([A-Z0-9]{1,20});(.*);?$"/>
     </bean>
 
     <bean id="recordRegexp" class="java.util.regex.Pattern" factory-method="compile">
         <constructor-arg value="^R;(.*)$"/>
     </bean>
 
-    <bean id="engine" class="org.bm.rules.impl.ProceduralEngine" />
+    <bean id="engine" class="org.bm.rules.impl.ProceduralEngine"/>
 
-    <bean id="resultFormatter" class="org.bm.rules.impl.DefaultResultFormatter" />
+    <bean id="resultFormatter" class="org.bm.rules.impl.DefaultResultFormatter"/>
 
 </beans>

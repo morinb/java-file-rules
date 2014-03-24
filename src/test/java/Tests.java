@@ -1,7 +1,12 @@
-import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
-import com.google.common.io.Files;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
+
 import org.apache.log4j.Logger;
 import org.bm.files.rules.ResultBuilder;
 import org.bm.files.rules.Statuses;
@@ -25,17 +30,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
+import com.google.common.collect.Lists;
+import com.google.common.io.Files;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * .
@@ -116,7 +116,12 @@ public class Tests {
     public void testRegExp() {
         Pattern p = (Pattern) context.getBean("optionalHeaderRegexp");
 
-        assertTrue("Pattern should match the string", p.matcher("A1234;FTA       ;PBL            ;20140315021702;20140315021702").matches());
+        assertTrue("Pattern should match the string", p.matcher("A1234;FTA       ;FTA       ;PBL            ;20140315021702;20140315021702").matches());
+
+        p = Pattern.compile("^H;([A-Z0-9]{8,11});([A-Z]{3});([A-Z0-9]{34});([A-Z]{3});([A-Z0-9]{11});([0-9]{1,8});([CD]{1});([0-9.]{19});([0-9]*?);([0-9]{8});([0-9]{6});([ \\!\\\\\"#\\$%&'\\(\\)\\*\\+,-\\.\\/0123456789\\:<\\=>\\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\\[\\\\\\\\\\]\\^_`abcdefghijklmnopqrstuvwxyz\\{\\|\\}~]{1,50});([A-Z0-9]{11});([ \\!\\\\\"#\\$%&'\\(\\)\\*\\+,-\\.\\/0123456789\\:<\\=>\\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\\[\\\\\\\\\\]\\^_`abcdefghijklmnopqrstuvwxyz\\{\\|\\}~]{1,50});([ \\!\\\\\"#\\$%&'\\(\\)\\*\\+,-\\.\\/0123456789\\:<\\=>\\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\\[\\\\\\\\\\]\\^_`abcdefghijklmnopqrstuvwxyz\\{\\|\\}~]{1,150});([A-Z]{3});([A-Z0-9]{1,20});(.*);?$");
+
+        assertTrue("Pattern should match the string", p.matcher("H;WWWWWWWWWWW;DEU;12345678;EUR;SCITITMMXXX;0;D;0.00;14;20140319;201403;WWWWWWWWWWWWWWWWWWWWWW;AAAAAAAAAAA;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;DEU;FR12312312312;").matches());
+
     }
 
     @Test
