@@ -26,7 +26,7 @@
     </bean>
 
     <bean id="headerRegexp" class="java.util.regex.Pattern" factory-method="compile">
-        <constructor-arg value="^H;([A-Z0-9]{8,11});([A-Z]{3});([A-Z0-9]{34});([A-Z]{3});([A-Z0-9]{11});([0-9]{1,8});([CD]{1});([0-9.]{19});([0-9]*?);([0-9]{8});([0-9]{6});([ \!\\&quot;#\$%&amp;&apos;\(\)\*\+,-\.\/0123456789\:&lt;\=&gt;\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~]{1,50});([A-Z0-9]{11});([ \!\\&quot;#\$%&amp;&apos;\(\)\*\+,-\.\/0123456789\:&lt;\=&gt;\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~]{1,50});([ \!\\&quot;#\$%&amp;&apos;\(\)\*\+,-\.\/0123456789\:&lt;\=&gt;\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~]{1,150});([A-Z]{3});([A-Z0-9]{1,20});(.*);?$"/>
+        <constructor-arg value="^H;([A-Z0-9]{8,11});([A-Z]{3});([A-Z0-9]{1,34});([A-Z]{3});([A-Z0-9]{11});([0-9]{1,8});([CD]{1});([0-9.]{1,19});([0-9]+?);([0-9]{8});([0-9]{6});([ \!\\&quot;#\$%&amp;&apos;\(\)\*\+,\-\.\/0123456789\:&lt;\=&gt;\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~]{1,50});([A-Z0-9]{11});([ \!\\&quot;#\$%&amp;&apos;\(\)\*\+,\-\.\/0123456789\:&lt;\=&gt;\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~]{1,50});([ \!\\&quot;#\$%&amp;&apos;\(\)\*\+,\-\.\/0123456789\:&lt;\=&gt;\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~]{1,150});([A-Z]{3});([A-Z0-9]{1,20});(.*);?$"/>
     </bean>
 
     <bean id="recordRegexp" class="java.util.regex.Pattern" factory-method="compile">

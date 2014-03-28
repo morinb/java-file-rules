@@ -118,7 +118,7 @@ public class Tests {
 
         assertTrue("Pattern should match the string", p.matcher("A1234;FTA       ;FTA       ;PBL            ;20140315021702;20140315021702").matches());
 
-        p = Pattern.compile("^H;([A-Z0-9]{8,11});([A-Z]{3});([A-Z0-9]{34});([A-Z]{3});([A-Z0-9]{11});([0-9]{1,8});([CD]{1});([0-9.]{19});([0-9]*?);([0-9]{8});([0-9]{6});([ \\!\\\\\"#\\$%&'\\(\\)\\*\\+,-\\.\\/0123456789\\:<\\=>\\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\\[\\\\\\\\\\]\\^_`abcdefghijklmnopqrstuvwxyz\\{\\|\\}~]{1,50});([A-Z0-9]{11});([ \\!\\\\\"#\\$%&'\\(\\)\\*\\+,-\\.\\/0123456789\\:<\\=>\\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\\[\\\\\\\\\\]\\^_`abcdefghijklmnopqrstuvwxyz\\{\\|\\}~]{1,50});([ \\!\\\\\"#\\$%&'\\(\\)\\*\\+,-\\.\\/0123456789\\:<\\=>\\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\\[\\\\\\\\\\]\\^_`abcdefghijklmnopqrstuvwxyz\\{\\|\\}~]{1,150});([A-Z]{3});([A-Z0-9]{1,20});(.*);?$");
+        p = (Pattern) context.getBean("headerRegexp");
 
         assertTrue("Pattern should match the string", p.matcher("H;WWWWWWWWWWW;DEU;12345678;EUR;SCITITMMXXX;0;D;0.00;14;20140319;201403;WWWWWWWWWWWWWWWWWWWWWW;AAAAAAAAAAA;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX;DEU;FR12312312312;").matches());
 
